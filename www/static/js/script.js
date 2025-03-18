@@ -1,10 +1,10 @@
 window.onload = init;
 
 const state = {
-    root: undefined,
+    root,
 }
 
 function init() {
-    root = document.querySelector("#root");
-    root.innerHTML = "Websocket";
+    state.root = document.querySelector("#root");
+    state.root.innerHTML = "Websocket";
 }

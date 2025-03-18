@@ -6,7 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"websocket/src/routes"
+	"websocket/src/controllers"
+	"websocket/src/pkg/utils"
 )
 
 const (
@@ -14,7 +15,7 @@ const (
 )
 
 var (
-	port = 9000
+	port int
 	tmpl *template.Template
 	err  error
 )
@@ -27,9 +28,10 @@ func init() {
 }
 
 func main() {
+	port = utils.Port()
 	address := fmt.Sprintf(":%d", port)
 
-	routes.Register(tmpl, STATIC)
+	controllers.Register(tmpl, STATIC)
 
 	fmt.Printf("\n\n\tServer running on %s\n\n", address)
 	err := http.ListenAndServe(address, nil)

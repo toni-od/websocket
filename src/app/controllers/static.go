@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	"websocket/src/models"
+	"websocket/src/app/models"
 )
 
 func Static(folder string) http.HandlerFunc {
@@ -17,16 +17,8 @@ func Static(folder string) http.HandlerFunc {
 			Redirect: "",
 		}
 
-		workingDir, err := os.Getwd()
-		if err != nil {
-			w.Header().Set("Content-Type", "application/json")
-			response.Code = http.StatusInternalServerError
-			response.Message = "Internal server error!"
-			json.NewEncoder(w).Encode(response)
-			return
-		}
 
-		filePath := path.Join(workingDir, folder, r.URL.Path)
+		filePath := path.Join(folder, r.URL.Path)
 
 		fileinfo, err := os.Stat(filePath)
 		if err != nil {

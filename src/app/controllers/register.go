@@ -6,6 +6,8 @@ import (
 )
 
 func Register(tmpl *template.Template, staticDir string) {
-	http.HandleFunc("GET /", Index(tmpl))
-	http.HandleFunc("GET /static/", Static(staticDir))
+	http.HandleFunc("/static/", Static(staticDir))
+	
+	http.HandleFunc("/", Index(tmpl))
+	http.HandleFunc("/ws", ServeWS)
 }
